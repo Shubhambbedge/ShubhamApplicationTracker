@@ -4,33 +4,47 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shubham — Job Command Center</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0A0E0A;
-  --s1:#0D120D;
-  --s2:#101610;
-  --s3:#141C14;
-  --s4:#182018;
-  --g1:#4ADE80;
-  --g2:#22C55E;
-  --g3:#16A34A;
-  --gold:#F59E0B;
-  --gold2:#D97706;
-  --orange:#FB923C;
-  --red:#F87171;
-  --sky:#38BDF8;
-  --violet:#A78BFA;
-  --border:rgba(74,222,128,0.1);
-  --border2:rgba(74,222,128,0.22);
-  --border3:rgba(74,222,128,0.4);
-  --t1:#F0FDF4;
-  --t2:#BBF7D0;
-  --t3:#86EFAC;
-  --m1:#4B5E4B;
-  --m2:#2D3D2D;
-  --glow:rgba(74,222,128,0.12);
-  --glow2:rgba(245,158,11,0.1);
+  --bg:#F0F4FF;
+  --bg2:#E8EEFB;
+  --card:#FFFFFF;
+  --card2:#F5F8FF;
+  --card3:#EDF1FC;
+  --blue:#2563EB;
+  --blue2:#3B82F6;
+  --blue3:#60A5FA;
+  --bluebg:#EFF6FF;
+  --bluebg2:#DBEAFE;
+  --green:#16A34A;
+  --green2:#22C55E;
+  --greenbg:#F0FDF4;
+  --greenbg2:#DCFCE7;
+  --gold:#D97706;
+  --goldbg:#FFFBEB;
+  --goldbg2:#FEF3C7;
+  --orange:#EA580C;
+  --orangebg:#FFF7ED;
+  --red:#DC2626;
+  --redbg:#FEF2F2;
+  --redbg2:#FEE2E2;
+  --violet:#7C3AED;
+  --violetbg:#F5F3FF;
+  --sky:#0284C7;
+  --skybg:#F0F9FF;
+  --border:#C7D7F5;
+  --border2:#A5BCE8;
+  --border3:#7BA0D9;
+  --t1:#0F1B3D;
+  --t2:#1E3A6E;
+  --t3:#2D5599;
+  --m1:#5A6F8A;
+  --m2:#8FA5C0;
+  --m3:#C5D4E6;
+  --shadow:0 1px 3px rgba(37,99,235,0.07),0 1px 2px rgba(0,0,0,0.04);
+  --shadow2:0 4px 16px rgba(37,99,235,0.1),0 2px 6px rgba(0,0,0,0.05);
+  --shadow3:0 8px 28px rgba(37,99,235,0.14);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
@@ -41,411 +55,527 @@ body{
   min-height:100vh;
   overflow-x:hidden;
 }
-
-/* ANIMATED BACKGROUND */
 body::before{
   content:'';position:fixed;inset:0;
   background:
-    radial-gradient(ellipse 600px 400px at 80% -10%,rgba(74,222,128,0.07) 0%,transparent 70%),
-    radial-gradient(ellipse 400px 500px at -10% 80%,rgba(245,158,11,0.05) 0%,transparent 70%),
-    radial-gradient(ellipse 300px 300px at 50% 50%,rgba(74,222,128,0.02) 0%,transparent 60%);
-  pointer-events:none;z-index:0;animation:bgShift 20s ease-in-out infinite;
-}
-@keyframes bgShift{
-  0%,100%{opacity:1;}
-  50%{opacity:0.6;}
-}
-
-/* GRID */
-body::after{
-  content:'';position:fixed;inset:0;
-  background-image:linear-gradient(rgba(74,222,128,0.018) 1px,transparent 1px),linear-gradient(90deg,rgba(74,222,128,0.018) 1px,transparent 1px);
-  background-size:48px 48px;
+    radial-gradient(ellipse 800px 600px at 95% -10%,rgba(96,165,250,0.15) 0%,transparent 60%),
+    radial-gradient(ellipse 600px 700px at -5% 95%,rgba(167,139,250,0.08) 0%,transparent 60%),
+    radial-gradient(ellipse 400px 400px at 50% 50%,rgba(37,99,235,0.03) 0%,transparent 70%);
   pointer-events:none;z-index:0;
 }
 
-/* ===== HEADER ===== */
+/* ZOHO-STYLE TOP NAV */
+.top-nav{
+  background:#1A1F36;
+  height:36px;
+  display:flex;align-items:center;
+  padding:0 2rem;gap:1.5rem;
+  position:relative;z-index:300;
+}
+.top-nav-link{
+  font-size:0.7rem;font-weight:500;color:rgba(255,255,255,0.65);
+  cursor:pointer;transition:color 0.15s;letter-spacing:0.01em;
+  text-decoration:none;
+}
+.top-nav-link:hover{color:white;}
+.top-nav-right{margin-left:auto;display:flex;align-items:center;gap:1rem;}
+
+/* MAIN HEADER */
 header{
-  position:sticky;top:0;z-index:200;
-  background:rgba(10,14,10,0.92);
-  backdrop-filter:blur(20px);
+  position:sticky;top:36px;z-index:200;
+  background:rgba(255,255,255,0.95);
+  backdrop-filter:blur(16px);
   border-bottom:1px solid var(--border);
-  padding:0 2rem;
-  height:58px;
+  padding:0 2rem;height:58px;
   display:flex;align-items:center;justify-content:space-between;
+  box-shadow:0 2px 12px rgba(37,99,235,0.08);
 }
 .brand{display:flex;align-items:center;gap:0.7rem;}
-.brand-dot{
-  width:32px;height:32px;border-radius:9px;
-  background:linear-gradient(135deg,var(--g3),var(--g1));
+.brand-logo{
+  width:36px;height:36px;border-radius:10px;
+  background:linear-gradient(135deg,var(--blue),var(--blue2));
   display:flex;align-items:center;justify-content:center;
-  font-size:0.9rem;
-  box-shadow:0 0 16px rgba(74,222,128,0.35);
+  font-size:1rem;box-shadow:0 3px 12px rgba(37,99,235,0.3);
+  color:white;font-weight:800;font-size:0.8rem;letter-spacing:-0.03em;
 }
 .brand-name{
-  font-size:1rem;font-weight:800;letter-spacing:-0.02em;
-  background:linear-gradient(90deg,var(--t1),var(--t3));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  font-size:1.05rem;font-weight:800;color:var(--t1);letter-spacing:-0.02em;
 }
-.brand-sub{font-size:0.62rem;color:var(--m1);letter-spacing:0.06em;text-transform:uppercase;margin-top:1px;}
-.hdr-right{display:flex;align-items:center;gap:0.6rem;}
-.streak{
-  background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.25);
-  color:var(--gold);padding:0.3rem 0.75rem;border-radius:999px;
-  font-size:0.72rem;font-weight:700;letter-spacing:0.02em;
-  animation:streakPulse 3s ease-in-out infinite;
+.brand-sub{font-size:0.6rem;color:var(--m1);letter-spacing:0.05em;text-transform:uppercase;margin-top:1px;}
+.hdr-right{display:flex;align-items:center;gap:0.55rem;}
+.streak-badge{
+  background:var(--goldbg);border:1px solid rgba(217,119,6,0.25);
+  color:var(--gold);padding:0.3rem 0.8rem;border-radius:999px;
+  font-size:0.72rem;font-weight:700;
 }
-@keyframes streakPulse{0%,100%{box-shadow:none;}50%{box-shadow:0 0 12px rgba(245,158,11,0.3);}}
-.dt-pill{
-  background:var(--s2);border:1px solid var(--border);
-  color:var(--m1);padding:0.3rem 0.7rem;border-radius:6px;
-  font-size:0.65rem;font-family:'JetBrains Mono',monospace;
+.dt-chip{
+  background:var(--card2);border:1px solid var(--border);
+  color:var(--m1);padding:0.3rem 0.7rem;border-radius:7px;
+  font-size:0.63rem;font-family:'JetBrains Mono',monospace;
 }
 
-/* ===== MAIN ===== */
+/* RESET ALL BUTTON */
+.reset-all-btn{
+  background:var(--redbg);border:1.5px solid rgba(220,38,38,0.25);
+  color:var(--red);padding:0.32rem 0.85rem;border-radius:7px;
+  font-size:0.72rem;font-weight:700;cursor:pointer;
+  font-family:'Outfit',sans-serif;transition:all 0.18s;
+  display:flex;align-items:center;gap:0.35rem;
+  box-shadow:var(--shadow);
+}
+.reset-all-btn:hover{background:var(--redbg2);border-color:rgba(220,38,38,0.45);box-shadow:0 2px 10px rgba(220,38,38,0.15);}
+.reset-all-btn .r-icon{font-size:0.75rem;}
+
+/* RESET MODAL */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(15,27,61,0.45);
+  z-index:999;display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity 0.2s;
+}
+.modal-overlay.show{opacity:1;pointer-events:all;}
+.modal{
+  background:var(--card);border-radius:16px;
+  padding:2rem;width:420px;max-width:90vw;
+  box-shadow:0 20px 60px rgba(15,27,61,0.2);
+  border:1px solid var(--border);
+  transform:translateY(10px);transition:transform 0.2s;
+}
+.modal-overlay.show .modal{transform:translateY(0);}
+.modal-icon{font-size:2rem;margin-bottom:0.75rem;display:block;text-align:center;}
+.modal-title{font-size:1.1rem;font-weight:800;color:var(--t1);text-align:center;margin-bottom:0.5rem;}
+.modal-desc{font-size:0.82rem;color:var(--m1);text-align:center;line-height:1.6;margin-bottom:1.5rem;}
+.modal-desc b{color:var(--red);font-weight:700;}
+.modal-options{display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1.5rem;}
+.modal-option{
+  display:flex;align-items:center;gap:0.6rem;
+  background:var(--card2);border:1px solid var(--border);
+  border-radius:9px;padding:0.7rem 0.9rem;cursor:pointer;
+  transition:all 0.15s;
+}
+.modal-option:hover{border-color:var(--border2);background:var(--bluebg);}
+.modal-option input[type=checkbox]{
+  width:16px;height:16px;accent-color:var(--blue);cursor:pointer;
+}
+.modal-option-text{font-size:0.8rem;font-weight:600;color:var(--t2);}
+.modal-option-sub{font-size:0.7rem;color:var(--m1);}
+.modal-btns{display:flex;gap:0.6rem;}
+.modal-cancel{
+  flex:1;background:var(--card2);border:1px solid var(--border);
+  color:var(--m1);padding:0.65rem;border-radius:8px;
+  font-size:0.82rem;font-weight:600;cursor:pointer;
+  font-family:'Outfit',sans-serif;transition:all 0.15s;
+}
+.modal-cancel:hover{background:var(--card3);color:var(--t1);}
+.modal-confirm{
+  flex:1;background:var(--red);border:none;
+  color:white;padding:0.65rem;border-radius:8px;
+  font-size:0.82rem;font-weight:700;cursor:pointer;
+  font-family:'Outfit',sans-serif;transition:all 0.15s;
+  box-shadow:0 3px 10px rgba(220,38,38,0.25);
+}
+.modal-confirm:hover{background:#B91C1C;box-shadow:0 4px 14px rgba(220,38,38,0.35);}
+
+/* MAIN */
 main{position:relative;z-index:1;max-width:1380px;margin:0 auto;padding:1.5rem 2rem 4rem;}
 
-/* ===== MOTIVATION HERO ===== */
+/* SEC DIVIDER */
+.sdiv{
+  font-size:0.6rem;color:var(--m1);text-transform:uppercase;letter-spacing:0.1em;
+  font-weight:700;font-family:'JetBrains Mono',monospace;
+  display:flex;align-items:center;gap:0.6rem;margin-bottom:0.75rem;
+}
+.sdiv::after{content:'';flex:1;height:1px;background:var(--border);}
+
+/* MOTIVATION HERO */
 .motive-hero{
-  background:linear-gradient(135deg,rgba(22,163,74,0.1),rgba(74,222,128,0.06),rgba(245,158,11,0.06));
-  border:1px solid var(--border2);
-  border-radius:16px;
-  padding:1.25rem 1.5rem;
-  margin-bottom:1.25rem;
+  background:linear-gradient(135deg,#EFF6FF,#F0FDF9,#FFFBEB);
+  border:1px solid var(--border2);border-radius:16px;
+  padding:1.2rem 1.5rem;margin-bottom:1.2rem;
   display:flex;align-items:flex-start;gap:1rem;
-  position:relative;overflow:hidden;
+  position:relative;overflow:hidden;box-shadow:var(--shadow2);
 }
 .motive-hero::before{
-  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
-  background:linear-gradient(180deg,var(--g1),var(--gold));
+  content:'';position:absolute;left:0;top:0;bottom:0;width:4px;
+  background:linear-gradient(180deg,var(--blue),var(--green2));
 }
-.motive-hero::after{
-  content:'';position:absolute;right:-60px;top:-60px;
-  width:200px;height:200px;border-radius:50%;
-  background:radial-gradient(circle,rgba(74,222,128,0.06),transparent);
-  pointer-events:none;
-}
-.motive-icon{font-size:1.4rem;margin-top:1px;flex-shrink:0;}
+.motive-emoji{font-size:1.5rem;flex-shrink:0;margin-top:2px;}
 .motive-body{flex:1;}
 .motive-tag{
-  font-size:0.6rem;color:var(--g1);text-transform:uppercase;
-  letter-spacing:0.1em;font-weight:700;font-family:'JetBrains Mono',monospace;
-  margin-bottom:0.35rem;display:flex;align-items:center;gap:0.4rem;
+  font-size:0.58rem;color:var(--blue);text-transform:uppercase;letter-spacing:0.1em;
+  font-weight:700;font-family:'JetBrains Mono',monospace;margin-bottom:0.3rem;
+  display:flex;align-items:center;gap:0.4rem;
 }
-.motive-tag::before{content:'';width:16px;height:1px;background:var(--g1);opacity:0.5;}
-.motive-text{font-size:0.92rem;color:var(--t2);line-height:1.55;font-weight:400;}
-.motive-text b{color:white;font-weight:700;}
-.motive-actions{display:flex;flex-direction:column;gap:0.4rem;flex-shrink:0;}
+.motive-tag::before{content:'';width:14px;height:1.5px;background:var(--blue);opacity:0.4;border-radius:1px;}
+.motive-text{font-size:0.9rem;color:var(--t2);line-height:1.65;}
+.motive-text b{color:var(--blue);font-weight:700;}
+.motive-acts{display:flex;flex-direction:column;gap:0.35rem;flex-shrink:0;}
 .m-btn{
-  background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.2);
-  color:var(--t3);padding:0.4rem 0.85rem;border-radius:7px;
-  font-size:0.71rem;font-weight:600;cursor:pointer;
-  font-family:'Outfit',sans-serif;
-  transition:all 0.18s;white-space:nowrap;text-align:center;
+  background:white;border:1.5px solid var(--border2);color:var(--blue);
+  padding:0.38rem 0.9rem;border-radius:8px;font-size:0.7rem;font-weight:700;
+  cursor:pointer;font-family:'Outfit',sans-serif;transition:all 0.18s;
+  white-space:nowrap;text-align:center;box-shadow:var(--shadow);
 }
-.m-btn:hover{background:rgba(74,222,128,0.16);border-color:var(--border3);color:white;}
+.m-btn:hover{background:var(--bluebg);border-color:var(--border3);}
 
-/* ===== STATS ===== */
-.stats-grid{
-  display:grid;grid-template-columns:repeat(6,1fr);gap:0.85rem;margin-bottom:1.25rem;
-}
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:0.85rem;margin-bottom:1.2rem;}
 @media(max-width:1100px){.stats-grid{grid-template-columns:repeat(3,1fr);}}
 @media(max-width:600px){.stats-grid{grid-template-columns:repeat(2,1fr);}}
 .sc{
-  background:var(--s2);border:1px solid var(--border);border-radius:12px;
+  background:var(--card);border:1.5px solid var(--border);border-radius:14px;
   padding:1rem 0.95rem;position:relative;overflow:hidden;
-  transition:border-color 0.2s,transform 0.2s;
+  box-shadow:var(--shadow);transition:all 0.2s;
 }
-.sc:hover{border-color:var(--border2);transform:translateY(-2px);}
-.sc-corner{
-  position:absolute;top:0;right:0;
-  width:50px;height:50px;
-  border-radius:0 12px 0 100%;
-  opacity:0.06;
-}
-.sc-icon{font-size:1rem;margin-bottom:0.5rem;display:block;}
+.sc:hover{border-color:var(--border2);box-shadow:var(--shadow2);transform:translateY(-2px);}
+.sc-top{position:absolute;top:0;left:0;right:0;height:3px;border-radius:14px 14px 0 0;}
+.sc-icon{font-size:1.1rem;margin-bottom:0.45rem;display:block;}
 .sc-val{
-  font-size:2rem;font-weight:800;line-height:1;
-  font-family:'Outfit',sans-serif;letter-spacing:-0.03em;
+  font-size:2.1rem;font-weight:800;line-height:1;
+  font-family:'Outfit',sans-serif;letter-spacing:-0.04em;
 }
-.sc-name{font-size:0.65rem;color:var(--m1);text-transform:uppercase;letter-spacing:0.07em;margin-top:0.3rem;font-weight:600;}
-.sc-sub{font-size:0.62rem;color:var(--m2);margin-top:0.2rem;}
+.sc-name{font-size:0.62rem;color:var(--m1);text-transform:uppercase;letter-spacing:0.07em;margin-top:0.3rem;font-weight:700;}
+.sc-sub{font-size:0.6rem;color:var(--m2);margin-top:0.2rem;}
 
-/* ===== PROGRESS ===== */
-.prog-wrap{background:var(--s2);border:1px solid var(--border);border-radius:13px;padding:1.1rem 1.25rem;margin-bottom:1.25rem;}
-.prog-head{font-size:0.73rem;font-weight:700;color:var(--t2);margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;}
-.prog-head span{color:var(--m1);font-weight:400;font-size:0.65rem;font-family:'JetBrains Mono',monospace;}
+/* PROGRESS */
+.prog-card{
+  background:var(--card);border:1.5px solid var(--border);border-radius:14px;
+  padding:1.1rem 1.3rem;margin-bottom:1.2rem;box-shadow:var(--shadow);
+}
+.prog-head{font-size:0.78rem;font-weight:800;color:var(--t1);margin-bottom:0.9rem;display:flex;justify-content:space-between;align-items:center;}
+.prog-head span{color:var(--m1);font-weight:400;font-size:0.63rem;font-family:'JetBrains Mono',monospace;}
 .pr{margin-bottom:0.85rem;}
 .pr:last-child{margin-bottom:0;}
 .pr-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.32rem;}
-.pr-lbl{font-size:0.72rem;color:var(--m1);}
-.pr-val{font-size:0.72rem;color:var(--t3);font-weight:700;}
-.pr-pct{font-size:0.62rem;color:var(--m2);margin-left:0.3rem;font-family:'JetBrains Mono',monospace;}
-.pr-track{height:5px;background:rgba(255,255,255,0.04);border-radius:999px;overflow:hidden;}
+.pr-lbl{font-size:0.71rem;color:var(--m1);font-weight:600;}
+.pr-val{font-size:0.71rem;color:var(--t2);font-weight:700;}
+.pr-pct{font-size:0.6rem;color:var(--m2);margin-left:0.28rem;font-family:'JetBrains Mono',monospace;}
+.pr-track{height:8px;background:var(--bg2);border-radius:999px;overflow:hidden;border:1px solid var(--border);}
 .pr-fill{height:100%;border-radius:999px;transition:width 1.3s cubic-bezier(.4,0,.2,1);}
 
-/* ===== TWO COL ===== */
-.two-col{display:grid;grid-template-columns:1fr 1.25fr;gap:1.1rem;margin-bottom:1.25rem;}
+/* TWO COL */
+.two-col{display:grid;grid-template-columns:1fr 1.3fr;gap:1.1rem;margin-bottom:1.2rem;}
 @media(max-width:900px){.two-col{grid-template-columns:1fr;}}
 
-/* ===== FORM ===== */
-.form-card{background:var(--s2);border:1px solid var(--border);border-radius:13px;padding:1.25rem;}
-.card-title{font-size:0.82rem;font-weight:700;color:var(--t1);margin-bottom:1rem;display:flex;align-items:center;gap:0.45rem;}
-.ct-badge{background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.15);color:var(--g1);padding:0.1rem 0.45rem;border-radius:4px;font-size:0.58rem;font-family:'JetBrains Mono',monospace;font-weight:500;}
-.fg{display:flex;flex-direction:column;gap:0.28rem;margin-bottom:0.6rem;}
-.fg label{font-size:0.62rem;color:var(--m1);text-transform:uppercase;letter-spacing:0.07em;font-weight:600;}
+/* FORM */
+.form-card{background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:1.3rem;box-shadow:var(--shadow);}
+.card-title{font-size:0.85rem;font-weight:800;color:var(--t1);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;}
+.ct-badge{
+  background:var(--bluebg);border:1px solid var(--bluebg2);color:var(--blue);
+  padding:0.1rem 0.5rem;border-radius:4px;font-size:0.57rem;
+  font-family:'JetBrains Mono',monospace;font-weight:600;
+}
+.fg{display:flex;flex-direction:column;gap:0.28rem;margin-bottom:0.65rem;}
+.fg label{font-size:0.61rem;color:var(--m1);text-transform:uppercase;letter-spacing:0.07em;font-weight:700;}
 .fg input,.fg select,.fg textarea{
-  background:rgba(255,255,255,0.03);
-  border:1px solid rgba(74,222,128,0.1);
-  border-radius:8px;padding:0.58rem 0.8rem;
-  color:var(--t1);font-family:'Outfit',sans-serif;font-size:0.83rem;
-  outline:none;transition:all 0.18s;width:100%;
+  background:var(--card2);border:1.5px solid var(--border);border-radius:9px;
+  padding:0.6rem 0.85rem;color:var(--t1);
+  font-family:'Outfit',sans-serif;font-size:0.84rem;outline:none;transition:all 0.18s;width:100%;
 }
 .fg input:focus,.fg select:focus,.fg textarea:focus{
-  border-color:rgba(74,222,128,0.4);
-  background:rgba(74,222,128,0.04);
-  box-shadow:0 0 0 3px rgba(74,222,128,0.06);
+  border-color:var(--blue2);background:white;
+  box-shadow:0 0 0 3px rgba(37,99,235,0.08);
 }
 .fg input::placeholder,.fg textarea::placeholder{color:var(--m2);}
-.fg select option{background:#0D120D;}
-.fg textarea{resize:vertical;min-height:55px;font-size:0.8rem;}
+.fg select{cursor:pointer;}
+.fg textarea{resize:vertical;min-height:52px;font-size:0.8rem;}
 .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;}
+
+/* INPUT VALIDATION */
+.fg input.err,.fg select.err{border-color:var(--red) !important;background:#FFF5F5 !important;}
+.err-msg{font-size:0.62rem;color:var(--red);font-weight:600;margin-top:0.2rem;display:none;}
+.fg.has-err .err-msg{display:block;}
+.fg.has-err input,.fg.has-err select{border-color:var(--red);background:#FFF5F5;}
+
 .submit-btn{
-  width:100%;margin-top:0.25rem;
-  background:linear-gradient(135deg,var(--g3),var(--g2));
-  color:white;border:none;padding:0.8rem;border-radius:9px;
-  font-size:0.85rem;font-weight:800;cursor:pointer;
+  width:100%;margin-top:0.2rem;
+  background:linear-gradient(135deg,var(--blue),var(--blue2));
+  color:white;border:none;padding:0.82rem;border-radius:10px;
+  font-size:0.88rem;font-weight:800;cursor:pointer;
   font-family:'Outfit',sans-serif;letter-spacing:0.01em;
-  transition:all 0.2s;
-  box-shadow:0 4px 20px rgba(34,197,94,0.2);
+  transition:all 0.2s;box-shadow:0 4px 18px rgba(37,99,235,0.3);
 }
-.submit-btn:hover{transform:translateY(-1px);box-shadow:0 6px 28px rgba(34,197,94,0.32);}
+.submit-btn:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(37,99,235,0.4);}
 .submit-btn:active{transform:translateY(0);}
 
-/* QUICK STAT BAR */
-.qbar{display:flex;gap:0.45rem;flex-wrap:wrap;margin-top:0.85rem;padding-top:0.85rem;border-top:1px solid var(--border);}
+.qbar{display:flex;gap:0.4rem;flex-wrap:wrap;margin-top:0.9rem;padding-top:0.9rem;border-top:1.5px solid var(--border);}
 .qb{
-  flex:1;min-width:100px;
-  background:rgba(255,255,255,0.025);border:1px solid var(--border);
-  color:var(--m1);padding:0.42rem 0.5rem;border-radius:7px;
-  font-size:0.7rem;font-weight:600;cursor:pointer;
+  flex:1;min-width:88px;
+  background:var(--card2);border:1.5px solid var(--border);
+  color:var(--m1);padding:0.42rem 0.45rem;border-radius:8px;
+  font-size:0.68rem;font-weight:700;cursor:pointer;
   font-family:'Outfit',sans-serif;transition:all 0.18s;text-align:center;
+  box-shadow:var(--shadow);
 }
-.qb:hover{background:rgba(74,222,128,0.08);border-color:var(--border2);color:var(--t3);}
+.qb:hover{background:var(--bluebg);border-color:var(--border2);color:var(--blue);}
 
-/* ===== AI COACH ===== */
-.ai-card{background:var(--s2);border:1px solid var(--border);border-radius:13px;padding:1.25rem;display:flex;flex-direction:column;}
-.ai-head{display:flex;align-items:center;gap:0.6rem;margin-bottom:0.85rem;}
+/* AI COACH */
+.ai-card{background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:1.3rem;display:flex;flex-direction:column;box-shadow:var(--shadow);}
+.ai-head{display:flex;align-items:center;gap:0.6rem;margin-bottom:0.9rem;}
 .ai-live{
-  display:flex;align-items:center;gap:0.35rem;
-  background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);
-  padding:0.2rem 0.55rem;border-radius:999px;font-size:0.62rem;color:var(--g1);font-weight:600;
+  display:flex;align-items:center;gap:0.3rem;
+  background:var(--greenbg);border:1px solid rgba(22,163,74,0.2);
+  padding:0.2rem 0.6rem;border-radius:999px;font-size:0.6rem;color:var(--green);font-weight:700;
 }
-.live-dot{width:6px;height:6px;border-radius:50%;background:var(--g1);animation:blink 1.5s infinite;}
-@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
-.ai-model{font-size:0.6rem;color:var(--m2);font-family:'JetBrains Mono',monospace;margin-left:auto;}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--green2);animation:blink 1.5s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.2;}}
+.ai-title{font-size:0.82rem;font-weight:800;color:var(--t1);}
+.ai-model{font-size:0.58rem;color:var(--m2);font-family:'JetBrains Mono',monospace;margin-left:auto;}
 .ai-out{
-  background:rgba(0,0,0,0.2);border:1px solid var(--border);
-  border-radius:9px;padding:1rem;
-  font-size:0.79rem;line-height:1.85;color:var(--m1);
-  min-height:230px;flex:1;overflow-y:auto;
-  white-space:pre-wrap;
+  background:var(--card2);border:1.5px solid var(--border);border-radius:10px;
+  padding:1rem;font-size:0.79rem;line-height:1.85;color:var(--m1);
+  min-height:210px;flex:1;overflow-y:auto;white-space:pre-wrap;
   font-family:'Outfit',sans-serif;
-  scrollbar-width:thin;scrollbar-color:var(--s4) transparent;
+  scrollbar-width:thin;scrollbar-color:var(--border2) transparent;
 }
 .ai-out .r{color:var(--t2);}
 .ai-btns{display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;margin-top:0.75rem;}
 .ab{
-  background:rgba(255,255,255,0.03);border:1px solid var(--border);
-  color:var(--m1);padding:0.48rem 0.6rem;border-radius:7px;
-  font-size:0.71rem;font-weight:600;cursor:pointer;
-  font-family:'Outfit',sans-serif;transition:all 0.18s;text-align:center;
+  background:var(--card2);border:1.5px solid var(--border);color:var(--m1);
+  padding:0.5rem 0.6rem;border-radius:8px;font-size:0.7rem;font-weight:600;
+  cursor:pointer;font-family:'Outfit',sans-serif;transition:all 0.18s;text-align:center;
+  box-shadow:var(--shadow);
 }
-.ab:hover{background:rgba(74,222,128,0.08);border-color:var(--border2);color:var(--t3);}
+.ab:hover{background:var(--bluebg);border-color:var(--border2);color:var(--blue);}
 .ab.wide{
   grid-column:span 2;
-  background:linear-gradient(135deg,rgba(22,163,74,0.12),rgba(74,222,128,0.07));
-  border-color:rgba(74,222,128,0.2);color:var(--t2);
-  font-weight:700;font-size:0.73rem;
+  background:linear-gradient(135deg,var(--bluebg),#EFF6FF);
+  border-color:var(--border2);color:var(--blue);font-weight:700;font-size:0.72rem;
 }
-.ab.wide:hover{background:linear-gradient(135deg,rgba(22,163,74,0.2),rgba(74,222,128,0.12));color:white;}
+.ab.wide:hover{background:var(--bluebg2);color:var(--t1);}
 .ab.gold-btn{
   grid-column:span 2;
-  background:linear-gradient(135deg,rgba(245,158,11,0.1),rgba(217,119,6,0.08));
-  border-color:rgba(245,158,11,0.2);color:var(--gold);
+  background:var(--goldbg);border-color:rgba(217,119,6,0.25);color:var(--gold);font-weight:700;
 }
-.ab.gold-btn:hover{background:linear-gradient(135deg,rgba(245,158,11,0.18),rgba(217,119,6,0.14));color:white;}
+.ab.gold-btn:hover{background:var(--goldbg2);color:var(--t1);}
 
-/* ===== CHARTS ===== */
-.charts-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:1.25rem;}
+/* SMART TIPS */
+.tips-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.85rem;margin-bottom:1.2rem;}
+@media(max-width:900px){.tips-grid{grid-template-columns:1fr;}}
+.tip-card{
+  background:var(--card);border:1.5px solid var(--border);border-radius:14px;
+  padding:1.05rem 1.1rem;position:relative;overflow:hidden;box-shadow:var(--shadow);
+  transition:all 0.2s;
+}
+.tip-card:hover{box-shadow:var(--shadow2);transform:translateY(-1px);}
+.tip-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:14px 14px 0 0;}
+.tip-card.blue::before{background:linear-gradient(90deg,var(--blue),var(--blue3));}
+.tip-card.gold::before{background:linear-gradient(90deg,var(--gold),#FCD34D);}
+.tip-card.violet::before{background:linear-gradient(90deg,var(--violet),#A78BFA);}
+.tip-icon{font-size:1.2rem;margin-bottom:0.42rem;}
+.tip-title{font-size:0.76rem;font-weight:700;color:var(--t1);margin-bottom:0.3rem;}
+.tip-body{font-size:0.71rem;color:var(--m1);line-height:1.55;}
+.tip-body b{color:var(--blue);font-weight:700;}
+
+/* CHARTS */
+.charts-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:1.2rem;}
 @media(max-width:1100px){.charts-row{grid-template-columns:1fr;}}
-.chart-card{background:var(--s2);border:1px solid var(--border);border-radius:12px;padding:1.1rem;}
-.chart-ttl{font-size:0.65rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--m1);font-weight:700;margin-bottom:0.9rem;font-family:'JetBrains Mono',monospace;}
+.chart-card{background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:1.1rem;box-shadow:var(--shadow);}
+.chart-ttl{font-size:0.62rem;text-transform:uppercase;letter-spacing:0.09em;color:var(--m1);font-weight:700;margin-bottom:0.9rem;font-family:'JetBrains Mono',monospace;}
 .bl{display:flex;flex-direction:column;gap:0.52rem;}
-.br{display:flex;align-items:center;gap:0.55rem;}
-.blbl{font-size:0.68rem;color:var(--m1);min-width:70px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.btr{flex:1;height:4px;background:rgba(255,255,255,0.04);border-radius:999px;overflow:hidden;}
+.br{display:flex;align-items:center;gap:0.5rem;}
+.blbl{font-size:0.67rem;color:var(--m1);min-width:68px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.btr{flex:1;height:7px;background:var(--bg2);border-radius:999px;overflow:hidden;border:1px solid var(--border);}
 .bf{height:100%;border-radius:999px;transition:width 1.1s cubic-bezier(.4,0,.2,1);}
-.bv{font-size:0.62rem;color:var(--t3);min-width:16px;text-align:right;font-family:'JetBrains Mono',monospace;}
+.bv{font-size:0.6rem;color:var(--t2);min-width:16px;text-align:right;font-family:'JetBrains Mono',monospace;font-weight:600;}
 
-/* ===== TABLE ===== */
-.tbl-card{background:var(--s2);border:1px solid var(--border);border-radius:13px;padding:1.25rem;margin-bottom:1.25rem;}
-.tbl-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:0.75rem;}
-.tabs{display:flex;gap:0.35rem;flex-wrap:wrap;}
+/* TABLE */
+.tbl-card{background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:1.3rem;margin-bottom:1.2rem;box-shadow:var(--shadow);}
+.tbl-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:0.7rem;}
+.tabs{display:flex;gap:0.32rem;flex-wrap:wrap;}
 .t{
-  background:rgba(255,255,255,0.025);border:1px solid var(--border);
-  color:var(--m1);padding:0.28rem 0.75rem;border-radius:5px;
-  font-size:0.7rem;font-weight:600;cursor:pointer;transition:all 0.15s;
+  background:var(--card2);border:1.5px solid var(--border);color:var(--m1);
+  padding:0.3rem 0.78rem;border-radius:7px;font-size:0.69rem;font-weight:700;
+  cursor:pointer;transition:all 0.15s;
 }
-.t.on,.t:hover{background:rgba(74,222,128,0.1);border-color:var(--border2);color:var(--g1);}
+.t.on,.t:hover{background:var(--bluebg);border-color:var(--border2);color:var(--blue);}
 .srch{
-  background:rgba(255,255,255,0.025);border:1px solid var(--border);
-  border-radius:7px;padding:0.38rem 0.8rem;
-  color:var(--t1);font-family:'Outfit',sans-serif;font-size:0.77rem;
-  outline:none;transition:all 0.18s;width:190px;
+  background:var(--card2);border:1.5px solid var(--border);border-radius:8px;
+  padding:0.38rem 0.85rem;color:var(--t1);font-family:'Outfit',sans-serif;font-size:0.78rem;
+  outline:none;transition:all 0.18s;width:195px;
 }
-.srch:focus{border-color:rgba(74,222,128,0.3);background:rgba(74,222,128,0.03);}
+.srch:focus{border-color:var(--blue2);background:white;box-shadow:0 0 0 3px rgba(37,99,235,0.07);}
 .srch::placeholder{color:var(--m2);}
 .tbl-wrap{overflow-x:auto;}
 table{width:100%;border-collapse:collapse;}
-th{font-size:0.62rem;color:var(--m2);text-transform:uppercase;letter-spacing:0.08em;padding:0.5rem 0.65rem;text-align:left;border-bottom:1px solid var(--border);font-weight:700;}
-td{padding:0.7rem 0.65rem;font-size:0.78rem;border-bottom:1px solid rgba(255,255,255,0.025);vertical-align:middle;}
+th{
+  font-size:0.62rem;color:var(--m2);text-transform:uppercase;letter-spacing:0.08em;
+  padding:0.52rem 0.65rem;text-align:left;border-bottom:1.5px solid var(--border);font-weight:700;
+}
+td{
+  padding:0.72rem 0.65rem;font-size:0.8rem;
+  border-bottom:1px solid var(--bg2);vertical-align:middle;
+}
 tr:last-child td{border-bottom:none;}
-tr:hover td{background:rgba(74,222,128,0.02);}
+tr:hover td{background:var(--bluebg);}
 .co{font-weight:700;color:var(--t1);}
-.ro{color:var(--m1);font-size:0.71rem;margin-top:1px;}
-.sp{display:inline-block;padding:0.18rem 0.6rem;border-radius:999px;font-size:0.65rem;font-weight:600;}
-.s-ap{background:rgba(56,189,248,0.1);color:#7DD3FC;}
-.s-sc{background:rgba(245,158,11,0.1);color:#FCD34D;}
-.s-in{background:rgba(167,139,250,0.1);color:#C4B5FD;}
-.s-of{background:rgba(74,222,128,0.1);color:#86EFAC;}
-.s-re{background:rgba(248,113,113,0.08);color:#FCA5A5;}
-.ss{background:transparent;border:none;cursor:pointer;font-size:0.65rem;font-weight:600;outline:none;font-family:'Outfit',sans-serif;}
-.ptag{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);color:var(--m2);padding:0.12rem 0.45rem;border-radius:3px;font-size:0.62rem;}
-.delbtn{background:none;border:none;color:var(--m2);cursor:pointer;font-size:0.8rem;padding:0.25rem;border-radius:4px;transition:color 0.15s;}
-.delbtn:hover{color:var(--red);}
-.empty{text-align:center;padding:3rem;color:var(--m2);font-size:0.82rem;}
+.ro{color:var(--m1);font-size:0.71rem;margin-top:2px;}
+.sp{display:inline-flex;align-items:center;padding:0.18rem 0.6rem;border-radius:999px;font-size:0.65rem;font-weight:700;}
+.s-ap{background:var(--bluebg);color:var(--blue);}
+.s-sc{background:var(--goldbg);color:var(--gold);}
+.s-in{background:var(--violetbg);color:var(--violet);}
+.s-of{background:var(--greenbg);color:var(--green);}
+.s-re{background:var(--redbg);color:var(--red);}
+.ss{background:transparent;border:none;cursor:pointer;font-size:0.65rem;font-weight:700;outline:none;font-family:'Outfit',sans-serif;}
+.ptag{
+  background:var(--card2);border:1px solid var(--border);
+  color:var(--m1);padding:0.13rem 0.5rem;border-radius:4px;font-size:0.62rem;font-weight:600;
+}
+.delbtn{background:none;border:none;color:var(--m2);cursor:pointer;font-size:0.85rem;padding:0.3rem;border-radius:5px;transition:all 0.15s;}
+.delbtn:hover{color:var(--red);background:var(--redbg);}
+.empty{text-align:center;padding:3rem;color:var(--m2);font-size:0.85rem;}
 
-/* ===== TOAST ===== */
+/* TOAST */
 .toast{
   position:fixed;bottom:1.5rem;right:1.5rem;z-index:9999;
-  background:var(--s3);border:1px solid var(--border2);
-  color:var(--t2);padding:0.7rem 1.1rem;border-radius:9px;
-  font-size:0.78rem;font-weight:500;
-  transform:translateY(70px);opacity:0;
-  transition:all 0.3s cubic-bezier(.4,0,.2,1);
-  box-shadow:0 8px 30px rgba(0,0,0,0.5);
-  max-width:280px;
+  background:white;border:1.5px solid var(--border2);color:var(--t2);
+  padding:0.7rem 1.1rem;border-radius:10px;font-size:0.79rem;font-weight:600;
+  transform:translateY(70px);opacity:0;transition:all 0.3s cubic-bezier(.4,0,.2,1);
+  box-shadow:var(--shadow3);max-width:280px;
 }
 .toast.on{transform:translateY(0);opacity:1;}
-.spin{display:inline-block;width:9px;height:9px;border:2px solid rgba(255,255,255,0.15);border-top-color:var(--g1);border-radius:50%;animation:sp 0.75s linear infinite;vertical-align:middle;margin-left:5px;}
+.spin{display:inline-block;width:9px;height:9px;border:2px solid var(--border2);border-top-color:var(--blue);border-radius:50%;animation:sp 0.75s linear infinite;vertical-align:middle;margin-left:4px;}
 @keyframes sp{to{transform:rotate(360deg);}}
-
-/* ===== SEC DIVIDER ===== */
-.sdiv{
-  font-size:0.6rem;color:var(--m2);text-transform:uppercase;letter-spacing:0.1em;font-weight:700;
-  font-family:'JetBrains Mono',monospace;
-  display:flex;align-items:center;gap:0.6rem;margin-bottom:0.75rem;margin-top:0.25rem;
-}
-.sdiv::after{content:'';flex:1;height:1px;background:var(--border);}
-
-/* ===== SMART TIPS GRID ===== */
-.tips-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.85rem;margin-bottom:1.25rem;}
-@media(max-width:900px){.tips-grid{grid-template-columns:1fr;}}
-.tip-card{
-  background:var(--s2);border:1px solid var(--border);border-radius:12px;padding:1rem;
-  position:relative;overflow:hidden;
-}
-.tip-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
-.tip-card.green::before{background:linear-gradient(90deg,var(--g3),var(--g1));}
-.tip-card.gold::before{background:linear-gradient(90deg,var(--gold2),var(--gold));}
-.tip-card.violet::before{background:linear-gradient(90deg,#7C3AED,var(--violet));}
-.tip-icon{font-size:1.2rem;margin-bottom:0.5rem;}
-.tip-title{font-size:0.75rem;font-weight:700;color:var(--t2);margin-bottom:0.35rem;}
-.tip-body{font-size:0.72rem;color:var(--m1);line-height:1.55;}
-.tip-body b{color:var(--t3);}
 
 /* SCROLLBAR */
 ::-webkit-scrollbar{width:5px;height:5px;}
 ::-webkit-scrollbar-track{background:transparent;}
-::-webkit-scrollbar-thumb{background:var(--s4);border-radius:3px;}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
 
-/* ANIMATIONS */
-.fade{animation:fd 0.45s ease both;}
-@keyframes fd{from{opacity:0;transform:translateY(7px);}to{opacity:1;transform:translateY(0);}}
+.fade{animation:fd 0.4s ease both;}
+@keyframes fd{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
 </style>
 </head>
 <body>
 
+<!-- ZOHO-STYLE TOP BAR -->
+<div class="top-nav">
+  <span class="top-nav-link">Naukri</span>
+  <span class="top-nav-link">LinkedIn</span>
+  <span class="top-nav-link">iimjobs</span>
+  <span class="top-nav-link">Cutshort</span>
+  <span class="top-nav-link">Wellfound</span>
+  <div class="top-nav-right">
+    <span class="top-nav-link">🌐 English (India)</span>
+    <span class="top-nav-link" style="color:rgba(255,255,255,0.9);font-weight:700;">Shubham Bedge</span>
+  </div>
+</div>
+
+<!-- MAIN HEADER -->
 <header>
   <div class="brand">
-    <div class="brand-dot">🎯</div>
+    <div class="brand-logo">JCC</div>
     <div>
       <div class="brand-name">Job Command Center</div>
-      <div class="brand-sub">Shubham Bedge · Data Analyst · Pune</div>
+      <div class="brand-sub">Data Analyst · Pune · 5–7 LPA</div>
     </div>
   </div>
   <div class="hdr-right">
-    <div class="streak" id="streakBadge">🔥 0 Day Streak</div>
-    <div class="dt-pill" id="dateDisplay"></div>
+    <div class="streak-badge" id="streakBadge">🔥 0 Day Streak</div>
+    <div class="dt-chip" id="dateDisplay"></div>
+    <button class="reset-all-btn" onclick="openResetModal()">
+      <span class="r-icon">⚠</span> Reset / Fix
+    </button>
   </div>
 </header>
 
+<!-- RESET MODAL -->
+<div class="modal-overlay" id="resetModal">
+  <div class="modal">
+    <span class="modal-icon">⚠️</span>
+    <div class="modal-title">Reset / Fix Data</div>
+    <div class="modal-desc">Select what you want to reset. <b>This cannot be undone.</b></div>
+    <div class="modal-options">
+      <label class="modal-option">
+        <input type="checkbox" id="reset-jobs" checked>
+        <div>
+          <div class="modal-option-text">🗂 All Applications</div>
+          <div class="modal-option-sub">Clear entire applications list</div>
+        </div>
+      </label>
+      <label class="modal-option">
+        <input type="checkbox" id="reset-stats" checked>
+        <div>
+          <div class="modal-option-text">📊 All Stats & Counters</div>
+          <div class="modal-option-sub">Reset calls, messages, interviews, offers</div>
+        </div>
+      </label>
+      <label class="modal-option">
+        <input type="checkbox" id="reset-streak">
+        <div>
+          <div class="modal-option-text">🔥 Streak & Daily Progress</div>
+          <div class="modal-option-sub">Reset streak count and today's apps</div>
+        </div>
+      </label>
+      <label class="modal-option">
+        <input type="checkbox" id="reset-trend">
+        <div>
+          <div class="modal-option-text">📈 Trend / Chart Data</div>
+          <div class="modal-option-sub">Clear 7-day application trend</div>
+        </div>
+      </label>
+    </div>
+    <div class="modal-btns">
+      <button class="modal-cancel" onclick="closeResetModal()">Cancel</button>
+      <button class="modal-confirm" onclick="doReset()">Reset Selected</button>
+    </div>
+  </div>
+</div>
+
 <main>
 
-  <!-- MOTIVATION HERO -->
-  <div class="motive-hero fade" id="motiveBox">
-    <div class="motive-icon" id="motiveEmoji">💪</div>
+  <!-- MOTIVATION -->
+  <div class="motive-hero fade">
+    <div class="motive-emoji" id="mEmoji">💪</div>
     <div class="motive-body">
       <div class="motive-tag">Daily Motivation</div>
-      <div class="motive-text" id="motiveText">Loading your personalized motivation...</div>
+      <div class="motive-text" id="mText">Loading your motivation...</div>
     </div>
-    <div class="motive-actions">
+    <div class="motive-acts">
       <button class="m-btn" onclick="nextMotivation()">Next ↻</button>
-      <button class="m-btn" onclick="aiAnalyze('daily')">AI Plan ✦</button>
+      <button class="m-btn" onclick="aiAnalyze('motivation')">AI Boost ✦</button>
     </div>
   </div>
 
   <!-- STATS -->
-  <div class="sdiv">📊 Live Stats</div>
+  <div class="sdiv">📊 Live Dashboard</div>
   <div class="stats-grid fade">
     <div class="sc">
-      <div class="sc-corner" style="background:var(--g1);"></div>
+      <div class="sc-top" style="background:linear-gradient(90deg,var(--blue),var(--blue3));"></div>
       <span class="sc-icon">📨</span>
-      <div class="sc-val" id="s-total" style="background:linear-gradient(135deg,var(--g1),var(--sky));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">0</div>
+      <div class="sc-val" id="s-total" style="color:var(--blue);">0</div>
       <div class="sc-name">Total Applied</div>
       <div class="sc-sub">Target: 200/week</div>
     </div>
     <div class="sc">
-      <div class="sc-corner" style="background:var(--violet);"></div>
+      <div class="sc-top" style="background:linear-gradient(90deg,var(--violet),#A78BFA);"></div>
       <span class="sc-icon">📞</span>
       <div class="sc-val" id="s-calls" style="color:var(--violet);">0</div>
       <div class="sc-name">Calls Received</div>
       <div class="sc-sub" id="s-callrate">0% response</div>
     </div>
     <div class="sc">
-      <div class="sc-corner" style="background:var(--sky);"></div>
+      <div class="sc-top" style="background:linear-gradient(90deg,var(--sky),#38BDF8);"></div>
       <span class="sc-icon">🎤</span>
       <div class="sc-val" id="s-interviews" style="color:var(--sky);">0</div>
       <div class="sc-name">Interviews</div>
       <div class="sc-sub" id="s-intrate">0% from calls</div>
     </div>
     <div class="sc">
-      <div class="sc-corner" style="background:var(--gold);"></div>
+      <div class="sc-top" style="background:linear-gradient(90deg,var(--gold),var(--gold2));"></div>
       <span class="sc-icon">💬</span>
       <div class="sc-val" id="s-msgs" style="color:var(--gold);">0</div>
       <div class="sc-name">Recruiter Msgs</div>
       <div class="sc-sub">Target: 10/day</div>
     </div>
     <div class="sc">
-      <div class="sc-corner" style="background:var(--g2);"></div>
+      <div class="sc-top" style="background:linear-gradient(90deg,var(--green),var(--green2));"></div>
       <span class="sc-icon">🏆</span>
-      <div class="sc-val" id="s-offers" style="color:var(--g2);">0</div>
+      <div class="sc-val" id="s-offers" style="color:var(--green);">0</div>
       <div class="sc-name">Offers</div>
       <div class="sc-sub" id="s-offrate">0% offer rate</div>
     </div>
     <div class="sc">
-      <div class="sc-corner" style="background:var(--orange);"></div>
+      <div class="sc-top" style="background:linear-gradient(90deg,var(--orange),#FB923C);"></div>
       <span class="sc-icon">⚡</span>
       <div class="sc-val" id="s-today" style="color:var(--orange);">0</div>
       <div class="sc-name">Today's Apps</div>
@@ -454,36 +584,34 @@ tr:hover td{background:rgba(74,222,128,0.02);}
   </div>
 
   <!-- PROGRESS -->
-  <div class="prog-wrap fade">
-    <div class="prog-head">📈 Weekly Progress <span id="weekTotal">0 apps this week</span></div>
+  <div class="prog-card fade">
+    <div class="prog-head">📈 Weekly Progress <span id="wkTotal">0 apps this week</span></div>
     <div class="pr">
       <div class="pr-meta">
         <span class="pr-lbl">Applications</span>
         <span><span class="pr-val" id="p-apps">0 / 200</span><span class="pr-pct" id="p-apps-pct"> 0%</span></span>
       </div>
-      <div class="pr-track"><div class="pr-fill" id="pb-apps" style="width:0%;background:linear-gradient(90deg,var(--g3),var(--g1));"></div></div>
+      <div class="pr-track"><div class="pr-fill" id="pb-apps" style="width:0%;background:linear-gradient(90deg,var(--blue),var(--blue3));"></div></div>
     </div>
     <div class="pr">
       <div class="pr-meta">
         <span class="pr-lbl">Recruiter Messages</span>
         <span><span class="pr-val" id="p-msgs">0 / 70</span><span class="pr-pct" id="p-msgs-pct"> 0%</span></span>
       </div>
-      <div class="pr-track"><div class="pr-fill" id="pb-msgs" style="width:0%;background:linear-gradient(90deg,var(--gold2),var(--gold));"></div></div>
+      <div class="pr-track"><div class="pr-fill" id="pb-msgs" style="width:0%;background:linear-gradient(90deg,var(--gold),var(--gold2));"></div></div>
     </div>
     <div class="pr">
       <div class="pr-meta">
         <span class="pr-lbl">Interview Calls</span>
         <span><span class="pr-val" id="p-calls">0 / 5</span><span class="pr-pct" id="p-calls-pct"> 0%</span></span>
       </div>
-      <div class="pr-track"><div class="pr-fill" id="pb-calls" style="width:0%;background:linear-gradient(90deg,#7C3AED,var(--violet));"></div></div>
+      <div class="pr-track"><div class="pr-fill" id="pb-calls" style="width:0%;background:linear-gradient(90deg,var(--violet),#A78BFA);"></div></div>
     </div>
   </div>
 
   <!-- SMART TIPS -->
   <div class="sdiv">🧠 Smart Move of the Day</div>
-  <div class="tips-grid fade" id="smartTips">
-    <!-- filled by JS -->
-  </div>
+  <div class="tips-grid fade" id="smartTips"></div>
 
   <!-- FORM + AI -->
   <div class="sdiv">➕ Add Application & 🤖 AI Coach</div>
@@ -493,8 +621,16 @@ tr:hover td{background:rgba(74,222,128,0.02);}
     <div class="form-card">
       <div class="card-title">Add Application <span class="ct-badge">FAST INPUT</span></div>
       <div class="fgrid">
-        <div class="fg"><label>Company Name *</label><input type="text" id="f-company" placeholder="e.g. Unacademy"></div>
-        <div class="fg"><label>Job Role *</label><input type="text" id="f-role" placeholder="e.g. Data Analyst"></div>
+        <div class="fg" id="fg-company">
+          <label>Company Name *</label>
+          <input type="text" id="f-company" placeholder="e.g. Unacademy">
+          <span class="err-msg">Company name is required</span>
+        </div>
+        <div class="fg" id="fg-role">
+          <label>Job Role *</label>
+          <input type="text" id="f-role" placeholder="e.g. Data Analyst">
+          <span class="err-msg">Job role is required</span>
+        </div>
       </div>
       <div class="fgrid">
         <div class="fg">
@@ -521,7 +657,7 @@ tr:hover td{background:rgba(74,222,128,0.02);}
         <div class="fg"><label>Location</label><input type="text" id="f-location" placeholder="Pune / Remote"></div>
         <div class="fg"><label>CTC Range</label><input type="text" id="f-ctc" placeholder="5–7 LPA"></div>
       </div>
-      <div class="fg"><label>Notes</label><textarea id="f-notes" placeholder="Referral contact, job link, round info..."></textarea></div>
+      <div class="fg"><label>Notes</label><textarea id="f-notes" placeholder="Referral contact, job link, interview notes..."></textarea></div>
       <button class="submit-btn" onclick="addJob()">+ Add Application</button>
       <div class="qbar">
         <button class="qb" onclick="qa('msgs')">+1 Msg 💬</button>
@@ -534,28 +670,27 @@ tr:hover td{background:rgba(74,222,128,0.02);}
     <!-- AI COACH -->
     <div class="ai-card">
       <div class="ai-head">
-        <div class="ai-live"><div class="live-dot"></div>AI Coach</div>
-        <div style="font-size:0.8rem;font-weight:700;color:var(--t2);">Powered by Claude</div>
+        <div class="ai-live"><div class="live-dot"></div>AI Live</div>
+        <div class="ai-title">🤖 Personal Job Coach</div>
         <div class="ai-model">claude-sonnet-4</div>
       </div>
       <div class="ai-out" id="aiOut">Hey Shubham! 👋
 
-I'm your personal AI Job Coach. I know your full profile:
+I'm your AI Job Coach with full profile knowledge:
 • 2.5+ yrs Data Analyst — EdTech CRM Analytics
-• SQL Advanced ✓ · Power BI Expert ✓ · Python ✓
-• Portfolio live at shubhambbedge.github.io
+• SQL Advanced ✓  ·  Power BI Expert ✓  ·  Python ✓
+• Portfolio: shubhambbedge.github.io
 • Target: MIS/Data/CRM Analyst · 5–7 LPA · Pune/Remote
+• Contacts at Physics Wallah (referral opportunity!)
 
-I'll analyze your progress, suggest smart moves, identify which companies to target, and keep you motivated every single day.
-
-Tap any button below to get started! 🚀</div>
+Tap any button below for real-time insights, company targets, and daily action plans. 🚀</div>
       <div class="ai-btns">
         <button class="ab" onclick="aiAnalyze('analysis')">📊 Full Analysis</button>
         <button class="ab" onclick="aiAnalyze('strategy')">🗓 Today's Plan</button>
         <button class="ab" onclick="aiAnalyze('weakness')">⚠️ What to Fix</button>
         <button class="ab" onclick="aiAnalyze('predict')">🔮 Offer Prediction</button>
-        <button class="ab wide" onclick="aiAnalyze('companies')">🏢 Which Companies Should I Apply to Right Now?</button>
-        <button class="ab gold-btn" onclick="aiAnalyze('motivation')">✨ Give Me Motivation + Smart Move for Today</button>
+        <button class="ab wide" onclick="aiAnalyze('companies')">🏢 Which Companies to Apply to Right Now?</button>
+        <button class="ab gold-btn" onclick="aiAnalyze('motivation')">✨ Motivation + Smart Move for Today</button>
       </div>
     </div>
   </div>
@@ -565,15 +700,15 @@ Tap any button below to get started! 🚀</div>
   <div class="charts-row fade">
     <div class="chart-card">
       <div class="chart-ttl">By Platform</div>
-      <div class="bl" id="c-platform"><div style="color:var(--m2);font-size:0.72rem;">Add applications to see data</div></div>
+      <div class="bl" id="c-platform"><div style="color:var(--m2);font-size:0.75rem;">Add applications to see data</div></div>
     </div>
     <div class="chart-card">
       <div class="chart-ttl">By Status</div>
-      <div id="c-status"><div style="color:var(--m2);font-size:0.72rem;">Add applications to see data</div></div>
+      <div id="c-status"><div style="color:var(--m2);font-size:0.75rem;">Add applications to see data</div></div>
     </div>
     <div class="chart-card">
       <div class="chart-ttl">7-Day Trend</div>
-      <div class="bl" id="c-trend"><div style="color:var(--m2);font-size:0.72rem;">Track daily to see trend</div></div>
+      <div class="bl" id="c-trend"><div style="color:var(--m2);font-size:0.75rem;">Track daily to see trend</div></div>
     </div>
   </div>
 
@@ -581,7 +716,7 @@ Tap any button below to get started! 🚀</div>
   <div class="sdiv">📋 All Applications</div>
   <div class="tbl-card fade">
     <div class="tbl-topbar">
-      <div class="tabs" id="filterTabs">
+      <div class="tabs">
         <button class="t on" onclick="filterJobs('all',this)">All <span id="cnt-all"></span></button>
         <button class="t" onclick="filterJobs('applied',this)">Applied</button>
         <button class="t" onclick="filterJobs('screening',this)">Screening</button>
@@ -589,7 +724,7 @@ Tap any button below to get started! 🚀</div>
         <button class="t" onclick="filterJobs('offer',this)">Offer 🎉</button>
         <button class="t" onclick="filterJobs('rejected',this)">Rejected</button>
       </div>
-      <input type="text" class="srch" id="srchInput" placeholder="🔍 Search..." oninput="searchJobs()">
+      <input type="text" class="srch" id="srchInput" placeholder="🔍 Search company or role..." oninput="searchJobs()">
     </div>
     <div class="tbl-wrap">
       <table>
@@ -608,46 +743,44 @@ Tap any button below to get started! 🚀</div>
 <div class="toast" id="toast"></div>
 
 <script>
-// ===============================================================
-// MOTIVATION BANK
-// ===============================================================
+// ============================================================
+// MOTIVATIONS
+// ============================================================
 const MOTIVATIONS = [
   {e:'💪', t:`तू आधीच <b>EdTech domain मध्ये 2.5 years</b> काम केलंयस — हे freshers कडे नाही. तुझा domain advantage real आहे. <b>आज 40 applications टाक!</b>`},
-  {e:'🔥', t:`<b>HackerRank SQL Advanced</b> + live Power BI dashboard + GitHub projects — तू paper वर strong नाही, <b>proof मध्ये strong आहेस!</b> Recruiters हे बघतात.`},
-  {e:'🎯', t:`Physics Wallah मध्ये तू होतास — <b>तिथला एक referral = direct interview.</b> आजच 1 ex-colleague ला LinkedIn वर message कर!`},
-  {e:'⚡', t:`<b>100+ applications नंतर calls येतात</b> — हे statistics आहे. Consistency = Results. थांबू नकोस. <b>आज तुझा best day असू शकतो!</b>`},
-  {e:'🏆', t:`Unacademy, upGrad, Simplilearn — सगळे <b>EdTech data analysts hire करतायत.</b> तू exactly त्यांचा target profile आहेस. <b>Apply now!</b>`},
-  {e:'🚀', t:`Portfolio live आहे, resume strong आहे, skills proven आहेत — <b>फक्त right company तुला शोधतेय!</b> तू शोध त्यांना.`},
-  {e:'💡', t:`Data Analyst जो EdTech domain पण समजतो + technical skills पण आहेत — <b>हे combination rare आहे.</b> 5–7 LPA easily मिळेल तुला!`},
-  {e:'🌟', t:`आज <b>LinkedIn वर एक SQL tip post कर</b> — तुझे 2,574 followers बघतात. Recruiters active profiles ला 3x जास्त contact करतात.`},
-  {e:'🎪', t:`Rejection म्हणजे wrong fit — <b>not failure.</b> प्रत्येक rejection तुला right company जवळ घेऊन जातो. <b>Keep going, Shubham!</b>`},
-  {e:'💰', t:`<b>5–7 LPA negotiate कर confidently.</b> तुझा 2.5 years EdTech CRM experience हे market मध्ये rare आहे. तुझी value जास्त आहे!`},
+  {e:'🔥', t:`<b>HackerRank SQL Advanced</b> + live Power BI dashboard + GitHub — तू paper वर नाही, <b>proof मध्ये strong आहेस!</b>`},
+  {e:'🎯', t:`Physics Wallah मध्ये तू होतास — <b>एक referral = direct interview.</b> आजच ex-colleague ला LinkedIn वर message कर!`},
+  {e:'⚡', t:`<b>100+ applications नंतर calls येतात</b> — हे statistics आहे. Consistency = Results. <b>थांबू नकोस!</b>`},
+  {e:'🚀', t:`Unacademy, upGrad, Simplilearn — सगळे <b>EdTech data analysts hire करतायत.</b> तू exactly त्यांचा target profile आहेस!`},
+  {e:'🌟', t:`आज <b>LinkedIn वर एक SQL tip post कर</b> — 2,574 followers बघतात. Recruiters active profiles ला 3x जास्त contact करतात.`},
+  {e:'💡', t:`SQL Advanced + Power BI + EdTech domain — <b>हे combination market मध्ये rare आहे.</b> 5–7 LPA easily मिळेल!`},
+  {e:'🏆', t:`Rejection म्हणजे wrong fit — not failure. <b>प्रत्येक rejection तुला right company जवळ घेऊन जातो.</b> Keep going!`},
 ];
 
-// ===============================================================
-// SMART TIPS
-// ===============================================================
+// ============================================================
+// SMART TIPS (rotate daily)
+// ============================================================
 const SMART_TIPS = [
   [
-    {icon:'📧', title:'Cold Email HRs Today', body:'Find HR emails on LinkedIn. Send: <b>"Hi [Name], I\'m a Data Analyst with 2.5yr EdTech experience. Attaching resume. Open for a 15-min chat?"</b> — Send 10 today.', cls:'green'},
-    {icon:'🔗', title:'Referral Power Move', body:'<b>1 referral = 100 cold applications.</b> Message ex-Physics Wallah colleague: "Can you refer me for MIS Analyst role internally?" This is your #1 shortcut.', cls:'gold'},
-    {icon:'📝', title:'LinkedIn Optimization', body:'Update headline to: <b>"Data Analyst | SQL Advanced | Power BI | 2.5yr EdTech CRM"</b>. Recruiters search these exact keywords.', cls:'violet'},
+    {icon:'📧',title:'Cold Email HRs Today',body:'Find HR emails on LinkedIn. Send: <b>"Hi [Name], I\'m a Data Analyst with 2.5yr EdTech experience. Open for a 15-min chat?"</b> — Send 10 today.',cls:'blue'},
+    {icon:'🔗',title:'Referral Power Move',body:'<b>1 referral = 100 cold applications.</b> Message ex-PW colleague: "Can you refer me for MIS Analyst role?" This is your #1 shortcut.',cls:'gold'},
+    {icon:'📝',title:'LinkedIn Optimization',body:'Update headline to: <b>"Data Analyst | SQL Advanced | Power BI | 2.5yr EdTech CRM"</b>. Recruiters search these exact keywords.',cls:'violet'},
   ],
   [
-    {icon:'⏰', title:'Morning Power Hour', body:'Apply to <b>15 Naukri + 10 LinkedIn Easy Apply</b> before 11 AM. Morning applications get 40% more recruiter views.', cls:'green'},
-    {icon:'🎯', title:'Targeted > Bulk', body:'Apply to <b>5 companies via their career pages directly</b> — Unacademy, upGrad, Classplus, Scaler, Vedantu. Direct = 2x more response.', cls:'gold'},
-    {icon:'📊', title:'Post One Insight', body:'Share a <b>Power BI tip or SQL trick</b> on LinkedIn today. Your 2,574 followers will engage — and recruiters notice active profiles!', cls:'violet'},
+    {icon:'⏰',title:'Morning Power Hour',body:'Apply to <b>15 Naukri + 10 LinkedIn Easy Apply</b> before 11 AM. Morning applications get 40% more recruiter views.',cls:'blue'},
+    {icon:'🎯',title:'Direct > Portals',body:'Apply to <b>5 companies via career pages directly</b> — Unacademy, upGrad, Classplus, Scaler, Vedantu. Direct = 2x more response.',cls:'gold'},
+    {icon:'📊',title:'Post One Insight',body:'Share a <b>Power BI tip or SQL trick</b> on LinkedIn today. Your 2,574 followers engage — recruiters notice active profiles!',cls:'violet'},
   ],
   [
-    {icon:'🏢', title:'EdTech Focus', body:'Your profile fits <b>Unacademy (96%), Physics Wallah (94%), upGrad (88%)</b> best. Don\'t waste time on non-EdTech companies first.', cls:'green'},
-    {icon:'💼', title:'iimjobs for Senior Roles', body:'Try <b>iimjobs.com</b> — it lists 4–8 LPA Data Analyst roles in Pune that Naukri misses. Apply to 5 roles there today.', cls:'gold'},
-    {icon:'🤝', title:'Network Hack', body:'Search <b>"Data Analyst Pune"</b> on LinkedIn, connect with 10 people, send: <b>"I\'m also a data professional — would love to connect!"</b>', cls:'violet'},
+    {icon:'🏢',title:'EdTech First',body:'Your profile fits <b>Unacademy (96%), Physics Wallah (94%), upGrad (88%)</b> best. Focus here before non-EdTech.',cls:'blue'},
+    {icon:'💼',title:'Try iimjobs',body:'<b>iimjobs.com</b> lists 4–8 LPA Data Analyst roles in Pune that Naukri misses. Apply to 5 roles there today.',cls:'gold'},
+    {icon:'🤝',title:'Network Hack',body:'Search <b>"Data Analyst Pune"</b> on LinkedIn, connect with 10 people. One connection can become a referral.',cls:'violet'},
   ],
 ];
 
-// ===============================================================
+// ============================================================
 // STATE
-// ===============================================================
+// ============================================================
 let st = {
   jobs:[],msgs:0,calls:0,interviews:0,offers:0,
   todayApps:0,streak:0,lastDate:null,trend:{},
@@ -656,7 +789,7 @@ let st = {
 let curFilter='all';
 
 function load(){
-  try{const s=localStorage.getItem('jcc_v3');if(s)st={...st,...JSON.parse(s)};}catch(e){}
+  try{const s=localStorage.getItem('jcc_v4');if(s)st={...st,...JSON.parse(s)};}catch(e){}
   const today=new Date().toDateString();
   if(st.lastDate!==today){
     const y=new Date();y.setDate(y.getDate()-1);
@@ -664,16 +797,36 @@ function load(){
     st.lastDate=today;st.todayApps=0;save();
   }
 }
-function save(){try{localStorage.setItem('jcc_v3',JSON.stringify(st));}catch(e){}}
+function save(){try{localStorage.setItem('jcc_v4',JSON.stringify(st));}catch(e){}}
+
 function toast(msg,c){
   const t=document.getElementById('toast');
   t.textContent=msg;t.style.borderColor=c||'var(--border2)';
-  t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2500);
+  t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2600);
 }
 
-// ===============================================================
-// UPDATE UI
-// ===============================================================
+// ============================================================
+// RESET MODAL
+// ============================================================
+function openResetModal(){document.getElementById('resetModal').classList.add('show');}
+function closeResetModal(){document.getElementById('resetModal').classList.remove('show');}
+
+function doReset(){
+  const rJobs=document.getElementById('reset-jobs').checked;
+  const rStats=document.getElementById('reset-stats').checked;
+  const rStreak=document.getElementById('reset-streak').checked;
+  const rTrend=document.getElementById('reset-trend').checked;
+  if(rJobs)st.jobs=[];
+  if(rStats){st.calls=0;st.interviews=0;st.offers=0;st.msgs=0;}
+  if(rStreak){st.streak=0;st.todayApps=0;}
+  if(rTrend)st.trend={};
+  save();ui();closeResetModal();
+  toast('✅ Reset done! Data cleared.','var(--green)');
+}
+
+// ============================================================
+// UI
+// ============================================================
 function ui(){
   const n=st.jobs.length;
   document.getElementById('s-total').textContent=n;
@@ -699,46 +852,44 @@ function ui(){
   document.getElementById('pb-apps').style.width=wp+'%';
   document.getElementById('pb-msgs').style.width=mp+'%';
   document.getElementById('pb-calls').style.width=cp+'%';
-  document.getElementById('weekTotal').textContent=n+' apps this week';
+  document.getElementById('wkTotal').textContent=n+' apps this week';
   document.getElementById('streakBadge').textContent='🔥 '+(st.streak||0)+' Day Streak';
   document.getElementById('dateDisplay').textContent=new Date().toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short',year:'2-digit'});
   document.getElementById('cnt-all').textContent=n>0?`(${n})`:'';
   charts();renderJobs(curFilter);
 }
 
-// ===============================================================
+// ============================================================
 // CHARTS
-// ===============================================================
+// ============================================================
 function charts(){
   const jobs=st.jobs;
-  const cols=['#4ADE80','#38BDF8','#A78BFA','#F59E0B','#FB923C','#F472B6'];
-  // Platform
-  const pl={};jobs.forEach(j=>{pl[j.platform]=(pl[j.platform]||0)+1;});
+  const cols=['#2563EB','#7C3AED','#0284C7','#D97706','#16A34A','#EA580C'];
+  const pl={};
+  jobs.forEach(j=>{pl[j.platform]=(pl[j.platform]||0)+1;});
   const pe=Object.entries(pl).sort((a,b)=>b[1]-a[1]).slice(0,6);
   const mp=pe.length?pe[0][1]:1;
   document.getElementById('c-platform').innerHTML=pe.length?
-    pe.map((e,i)=>`<div class="br"><div class="blbl">${e[0]}</div><div class="btr"><div class="bf" style="width:${(e[1]/mp)*100}%;background:${cols[i]||'#4ADE80'};"></div></div><div class="bv">${e[1]}</div></div>`).join(''):
-    '<div style="color:var(--m2);font-size:0.72rem;">No data yet</div>';
-  // Status
+    pe.map((e,i)=>`<div class="br"><div class="blbl">${e[0]}</div><div class="btr"><div class="bf" style="width:${(e[1]/mp)*100}%;background:${cols[i]||'#2563EB'};"></div></div><div class="bv">${e[1]}</div></div>`).join(''):
+    '<div style="color:var(--m2);font-size:0.75rem;">No data yet</div>';
   const s={applied:0,screening:0,interview:0,offer:0,rejected:0};
   jobs.forEach(j=>{s[j.status]=(s[j.status]||0)+1;});
-  const sc=[{l:'Applied',v:s.applied,c:'#38BDF8'},{l:'Screening',v:s.screening,c:'#F59E0B'},{l:'Interview',v:s.interview,c:'#A78BFA'},{l:'Offer',v:s.offer,c:'#4ADE80'},{l:'Rejected',v:s.rejected,c:'#F87171'}].filter(x=>x.v>0);
+  const sc=[{l:'Applied',v:s.applied,c:'#2563EB'},{l:'Screening',v:s.screening,c:'#D97706'},{l:'Interview',v:s.interview,c:'#7C3AED'},{l:'Offer',v:s.offer,c:'#16A34A'},{l:'Rejected',v:s.rejected,c:'#DC2626'}].filter(x=>x.v>0);
   const tot=jobs.length||1;
   document.getElementById('c-status').innerHTML=sc.length?
     `<div class="bl">${sc.map(x=>`<div class="br"><div class="blbl">${x.l}</div><div class="btr"><div class="bf" style="width:${(x.v/tot)*100}%;background:${x.c};"></div></div><div class="bv">${x.v}</div></div>`).join('')}</div>`:
-    '<div style="color:var(--m2);font-size:0.72rem;">No data yet</div>';
-  // Trend
+    '<div style="color:var(--m2);font-size:0.75rem;">No data yet</div>';
   const tr=st.trend||{};
   const days=Object.keys(tr).sort().slice(-7);
   const mx=days.length?Math.max(...days.map(d=>tr[d])):1;
   document.getElementById('c-trend').innerHTML=days.length?
-    days.map(d=>`<div class="br"><div class="blbl">${new Date(d).toLocaleDateString('en',{weekday:'short'})}</div><div class="btr"><div class="bf" style="width:${(tr[d]/mx)*100}%;background:linear-gradient(90deg,var(--g3),var(--g1));"></div></div><div class="bv">${tr[d]}</div></div>`).join(''):
-    '<div style="color:var(--m2);font-size:0.72rem;">Track daily to see trend</div>';
+    days.map(d=>`<div class="br"><div class="blbl">${new Date(d).toLocaleDateString('en',{weekday:'short'})}</div><div class="btr"><div class="bf" style="width:${(tr[d]/mx)*100}%;background:linear-gradient(90deg,var(--blue),var(--blue3));"></div></div><div class="bv">${tr[d]}</div></div>`).join(''):
+    '<div style="color:var(--m2);font-size:0.75rem;">Track daily to see trend</div>';
 }
 
-// ===============================================================
+// ============================================================
 // RENDER JOBS
-// ===============================================================
+// ============================================================
 function renderJobs(filter){
   curFilter=filter;
   const srch=(document.getElementById('srchInput').value||'').toLowerCase();
@@ -756,8 +907,8 @@ function renderJobs(filter){
     return `<tr>
       <td><div class="co">${j.company}</div><div class="ro">${j.role}</div></td>
       <td><span class="ptag">${j.platform}</span></td>
-      <td style="color:var(--m1);font-size:0.71rem;">${j.location||'–'}</td>
-      <td style="color:var(--m1);font-size:0.71rem;">${j.ctc||'–'}</td>
+      <td style="color:var(--m1);font-size:0.72rem;">${j.location||'–'}</td>
+      <td style="color:var(--m1);font-size:0.72rem;">${j.ctc||'–'}</td>
       <td><span class="sp ${sc[j.status]}"><select class="ss ${sc[j.status]}" onchange="updSt(${i},this.value)">${['applied','screening','interview','offer','rejected'].map(s=>`<option value="${s}" ${j.status===s?'selected':''}>${sl[s]}</option>`).join('')}</select></span></td>
       <td style="color:var(--m2);font-size:0.65rem;font-family:'JetBrains Mono',monospace;white-space:nowrap;">${j.date}</td>
       <td style="color:var(--m1);font-size:0.71rem;max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${j.notes||''}">${j.notes||'–'}</td>
@@ -772,13 +923,23 @@ function filterJobs(f,btn){
 }
 function searchJobs(){renderJobs(curFilter);}
 
-// ===============================================================
-// ADD JOB
-// ===============================================================
+// ============================================================
+// ADD JOB WITH VALIDATION
+// ============================================================
+function clearErr(id){
+  const fg=document.getElementById('fg-'+id);
+  if(fg)fg.classList.remove('has-err');
+}
+
 function addJob(){
   const co=document.getElementById('f-company').value.trim();
   const ro=document.getElementById('f-role').value.trim();
-  if(!co||!ro){toast('⚠️ Company and Role are required!','var(--red)');return;}
+  let hasErr=false;
+  document.getElementById('fg-company').classList.remove('has-err');
+  document.getElementById('fg-role').classList.remove('has-err');
+  if(!co){document.getElementById('fg-company').classList.add('has-err');hasErr=true;}
+  if(!ro){document.getElementById('fg-role').classList.add('has-err');hasErr=true;}
+  if(hasErr){toast('⚠️ Please fill required fields (highlighted in red)','var(--red)');return;}
   const today=new Date().toISOString().split('T')[0];
   const job={
     company:co,role:ro,
@@ -799,15 +960,23 @@ function addJob(){
   ['f-company','f-role','f-location','f-ctc','f-notes'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('f-platform').selectedIndex=0;
   document.getElementById('f-status').selectedIndex=0;
-  toast('✅ Application added! Keep going, Shubham! 🚀','var(--g1)');
+  toast('✅ Application added! Keep pushing, Shubham! 🚀','var(--green)');
 }
+
+// Clear errors on input
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('f-company').addEventListener('input',()=>clearErr('company'));
+  document.getElementById('f-role').addEventListener('input',()=>clearErr('role'));
+  closeResetModal();
+  document.getElementById('resetModal').addEventListener('click',function(e){if(e.target===this)closeResetModal();});
+});
 
 function updSt(i,ns){
   const old=st.jobs[i].status;st.jobs[i].status=ns;
   if(ns==='screening'&&old==='applied')st.calls=(st.calls||0)+1;
   if(ns==='interview'&&old!=='interview')st.interviews=(st.interviews||0)+1;
   if(ns==='offer')st.offers=(st.offers||0)+1;
-  save();ui();toast(`Status → ${ns}`,'var(--sky)');
+  save();ui();toast(`Status updated → ${ns}`,'var(--blue)');
 }
 
 function delJob(i){
@@ -815,66 +984,65 @@ function delJob(i){
 }
 
 function qa(t){
-  if(t==='msgs'){st.msgs=(st.msgs||0)+1;toast('+1 Recruiter Message 💬','var(--gold)');}
-  if(t==='calls'){st.calls=(st.calls||0)+1;toast('+1 Call Received 📞','var(--violet)');}
+  if(t==='msgs'){st.msgs=(st.msgs||0)+1;toast('+1 Recruiter Message tracked 💬','var(--gold)');}
+  if(t==='calls'){st.calls=(st.calls||0)+1;toast('+1 Call Received tracked 📞','var(--violet)');}
   if(t==='today'){
     st.todayApps=(st.todayApps||0)+5;
     const d=new Date().toISOString().split('T')[0];
     st.trend=st.trend||{};st.trend[d]=(st.trend[d]||0)+5;
     toast('+5 Today\'s apps tracked ⚡','var(--orange)');
   }
-  if(t==='reset'){st.todayApps=0;toast('Today reset ↺','var(--m1)');}
+  if(t==='reset'){st.todayApps=0;save();ui();toast('Today reset ↺','var(--m1)');return;}
   save();ui();
 }
 
-// ===============================================================
+// ============================================================
 // MOTIVATION
-// ===============================================================
+// ============================================================
 function nextMotivation(){
   st.motiveIdx=((st.motiveIdx||0)+1)%MOTIVATIONS.length;
   save();showMotivation();
 }
 function showMotivation(){
   const m=MOTIVATIONS[st.motiveIdx||0];
-  document.getElementById('motiveEmoji').textContent=m.e;
-  document.getElementById('motiveText').innerHTML=m.t;
+  document.getElementById('mEmoji').textContent=m.e;
+  document.getElementById('mText').innerHTML=m.t;
 }
 
-// ===============================================================
+// ============================================================
 // SMART TIPS
-// ===============================================================
+// ============================================================
 function renderSmartTips(){
-  const set=SMART_TIPS[st.tipSet||0];
+  const set=SMART_TIPS[new Date().getDate()%SMART_TIPS.length];
   document.getElementById('smartTips').innerHTML=set.map(t=>`
     <div class="tip-card ${t.cls}">
       <div class="tip-icon">${t.icon}</div>
       <div class="tip-title">${t.title}</div>
       <div class="tip-body">${t.body}</div>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 
-// ===============================================================
+// ============================================================
 // AI COACH
-// ===============================================================
+// ============================================================
 async function callAI(prompt){
   const out=document.getElementById('aiOut');
-  out.innerHTML=`Analyzing your job search data...<span class="spin"></span>`;
+  out.innerHTML=`Analyzing your data...<span class="spin"></span>`;
   const stats={
     total:st.jobs.length,calls:st.calls||0,interviews:st.interviews||0,
     offers:st.offers||0,msgs:st.msgs||0,todayApps:st.todayApps||0,streak:st.streak||0,
     statuses:{applied:0,screening:0,interview:0,offer:0,rejected:0},
-    platforms:{},recentCos:st.jobs.slice(-8).map(j=>j.company)
+    platforms:{},recent:st.jobs.slice(-6).map(j=>j.company)
   };
   st.jobs.forEach(j=>{
     stats.statuses[j.status]=(stats.statuses[j.status]||0)+1;
     stats.platforms[j.platform]=(stats.platforms[j.platform]||0)+1;
   });
-  const sys=`You are an expert job search coach for Shubham Bedge, Data Analyst from Pune.
-Profile: 2.5+ years EdTech CRM analytics, SQL Advanced (HackerRank), Power BI expert, Python, portfolio at shubhambbedge.github.io, 2574 LinkedIn followers.
-Target: MIS Analyst, Data Analyst, CRM Analyst in Pune/Remote at 5–7 LPA. Ex-company: Physics Wallah (has contacts).
-Top target companies: Unacademy (96% fit), Physics Wallah (94%), BYJU's, Simplilearn, upGrad, Vedantu, Classplus, Scaler.
-Be extremely specific, motivating, and actionable. Use bullet points with emojis. Name specific companies, specific actions, specific numbers. Keep under 200 words. Be a world-class coach — push Shubham to greatness.`;
+  const sys=`You are an expert job coach for Shubham Bedge, Data Analyst from Pune. 
+Profile: 2.5+ years EdTech CRM analytics, SQL Advanced (HackerRank), Power BI expert, Python, portfolio at shubhambbedge.github.io, 2574 LinkedIn followers. Ex-company: Physics Wallah.
+Target: MIS Analyst, Data Analyst, CRM Analyst · Pune/Remote · 5–7 LPA.
+Top targets: Unacademy (96%), Physics Wallah (94%), BYJU's, Simplilearn, upGrad, Vedantu, Classplus, Scaler.
+Be extremely direct, specific with company names and actions, motivating. Use bullet points + emojis. Max 200 words.`;
   try{
     const res=await fetch('https://api.anthropic.com/v1/messages',{
       method:'POST',headers:{'Content-Type':'application/json'},
@@ -890,36 +1058,31 @@ Be extremely specific, motivating, and actionable. Use bullet points with emojis
 
 function getOffline(s,t){
   const r=s.total>0?Math.round((s.calls/s.total)*100):0;
-  if(t.includes('analysis'))return`📊 <b>Current Status:</b><br>• ${s.total} applications sent — ${r}% response rate<br>• ${s.streak} day streak — consistency is your superpower!<br>• ${s.interviews} interviews from ${s.calls} calls<br><br>🎯 <b>Top 3 Actions Right Now:</b><br>• Apply to Unacademy & Physics Wallah (96–94% fit)<br>• Message 1 PW ex-colleague for referral TODAY<br>• Post 1 SQL/Power BI insight on LinkedIn<br><br>💪 You're building real momentum, Shubham!`;
-  if(t.includes('strategy'))return`🗓 <b>Today's Exact Plan:</b><br>• 9–11 AM: 15 Naukri + 10 LinkedIn Easy Apply<br>• 11 AM–12 PM: 5 iimjobs applications<br>• 1–2 PM: Message 3 PW ex-colleagues for referral<br>• 3–4 PM: Cold email 5 HRs from LinkedIn<br>• 5 PM: Update LinkedIn headline + 1 post<br><br>🔥 <b>Target: 40 apps + 5 recruiter messages today!</b>`;
-  if(t.includes('weakness'))return`⚠️ <b>Fix These Now:</b><br>• Response rate ${r}% — apply to more EdTech specifically<br>• Not using referrals enough — 1 referral = 100 cold apps<br>• LinkedIn activity low — post 2x/week for 3x recruiter views<br><br>✅ <b>What's Working:</b><br>• Strong resume with real numbers<br>• HackerRank SQL cert visible<br>• Portfolio live & accessible<br><br>💡 Biggest lever: One PW referral TODAY!`;
-  if(t.includes('companies'))return`🏢 <b>Apply to These RIGHT NOW:</b><br>• <b>Unacademy</b> — MIS Analyst (96% profile fit)<br>• <b>Physics Wallah</b> — use referral from ex-colleagues<br>• <b>upGrad</b> — Data Analyst (Pune/Remote both open)<br>• <b>Simplilearn</b> — CRM Analyst (strong match)<br>• <b>Vedantu</b> — Analytics role (EdTech match)<br>• <b>Classplus</b> — MIS Analyst (Pune-based)<br><br>💡 Apply via direct HR email for top 3!`;
-  if(t.includes('motivation'))return`✨ <b>You're Closer Than You Think:</b><br><br>Shubham, तू आधीच EdTech domain expert आहेस. SQL Advanced + Power BI + Python — हे combination market मध्ये rare आहे.<br><br>🎯 <b>Today's Smart Move:</b><br>Message one Physics Wallah ex-colleague right now. One referral changes everything.<br><br>💪 At ${s.total} applications, you're building momentum. The right company is reviewing your resume today. Stay consistent!<br><br>🔥 <b>Streak: ${s.streak} days — don't break it!</b>`;
-  return`🔮 <b>Offer Prediction:</b><br>At current pace: ~${Math.round(s.total*0.06)} interview calls expected<br>With 1 referral: 2–3x faster results<br>Timeline: First offer likely in <b>3–6 weeks</b><br><br>💡 <b>Single Biggest Lever:</b><br>Message Physics Wallah colleague TODAY for referral.<br>1 referral = skipping 100 cold applications.<br><br>You've got this, Shubham! 🚀`;
+  if(t.includes('analysis'))return`📊 <b>Status:</b><br>• ${s.total} apps · ${r}% response · ${s.streak} day streak<br><br>🎯 <b>Top Actions:</b><br>• Apply Unacademy & Physics Wallah (96–94% fit)<br>• Message 1 PW ex-colleague for referral<br>• Post 1 insight on LinkedIn today`;
+  if(t.includes('strategy'))return`🗓 <b>Today's Plan:</b><br>• 9–11 AM: 15 Naukri + 10 LinkedIn<br>• 11 AM: 5 iimjobs applications<br>• 1 PM: Message 3 PW contacts for referral<br>• 3 PM: Cold email 5 HRs<br>• 5 PM: Update LinkedIn + 1 post<br><br>🔥 Target: <b>40 apps + 5 recruiter messages!</b>`;
+  if(t.includes('weakness'))return`⚠️ <b>Fix These:</b><br>• Response ${r}% — apply more to EdTech only<br>• Referrals under-used — 1 = 100 cold apps<br>• LinkedIn activity low — post 2x/week<br><br>✅ <b>Working well:</b> strong resume, cert visible, portfolio live`;
+  if(t.includes('companies'))return`🏢 <b>Apply RIGHT NOW:</b><br>• <b>Unacademy</b> — MIS Analyst (96% fit)<br>• <b>Physics Wallah</b> — use referral<br>• <b>upGrad</b> — Data Analyst, Pune/Remote<br>• <b>Simplilearn</b> — CRM Analyst<br>• <b>Vedantu</b> — Analytics role<br>• <b>Classplus</b> — MIS Analyst, Pune`;
+  if(t.includes('motivation'))return`✨ <b>You Are Closer Than You Think!</b><br><br>Shubham, SQL Advanced + Power BI + EdTech domain — this combo is rare in the market.<br><br>🎯 <b>Today's Smart Move:</b><br>Message one Physics Wallah ex-colleague RIGHT NOW. One referral skips 100 cold applications.<br><br>🔥 Streak: <b>${s.streak} days</b> — don't break it!`;
+  return`🔮 <b>Offer Prediction:</b><br>Expected interviews: ~${Math.round(s.total*0.06)}<br>With 1 referral: 2–3x faster<br>Timeline: <b>First offer in 3–6 weeks</b><br><br>💡 Message Physics Wallah colleague TODAY!`;
 }
 
 function aiAnalyze(type){
-  const prompts={
-    analysis:'Give complete analysis of my job search performance with specific actionable recommendations.',
-    strategy:'What is my exact hour-by-hour strategy for today to maximize interview chances? Be very specific.',
-    weakness:'What are my 3 biggest weaknesses in this job search and exactly how do I fix each one this week?',
-    predict:'Based on my data, predict when I will get my first offer. Give me the key actions to speed it up.',
-    companies:'Which specific companies should I apply to RIGHT NOW? Give company names, roles, why I fit, and how to apply.',
-    daily:'Give me today\'s motivation, a smart career move, and a specific action that will make the biggest difference today.',
-    motivation:'Motivate me powerfully and give me one smart career move that will change my job search trajectory today.'
+  const p={
+    analysis:'Full analysis of my job search with specific recommendations.',
+    strategy:'Exact hour-by-hour strategy for today to maximize interview chances.',
+    weakness:'My 3 biggest weaknesses and exactly how to fix each one this week.',
+    predict:'Predict when I\'ll get my first offer and what to focus on to speed it up.',
+    companies:'Which specific companies should I apply to RIGHT NOW? Names, roles, why I fit.',
+    motivation:'Powerful motivation + one smart career move that will change my job search today.'
   };
-  callAI(prompts[type]);
+  callAI(p[type]);
 }
 
-// ===============================================================
+// ============================================================
 // INIT
-// ===============================================================
+// ============================================================
 load();ui();showMotivation();renderSmartTips();
-// Rotate smart tips every 24h based on day
-st.tipSet = new Date().getDate() % SMART_TIPS.length;
-renderSmartTips();
-// Auto-rotate motivation every 90 seconds
-setInterval(()=>{nextMotivation();}, 90000);
+setInterval(()=>{nextMotivation();},90000);
 </script>
 </body>
 </html>
